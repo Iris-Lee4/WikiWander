@@ -1,7 +1,7 @@
 ﻿-- Insert data into the UserProfile table
 SET IDENTITY_INSERT UserProfile ON;
 
-INSERT INTO UserProfile (id, firstName, lastName, displayName, email)
+INSERT INTO UserProfile (Id, FirstName, LastName, DisplayName, Email)
 VALUES
 (1, 'John', 'Doe', 'johnd', 'john.doe@example.com'),
 (2, 'Jane', 'Smith', 'janes', 'jane.smith@example.com'),
@@ -12,7 +12,7 @@ SET IDENTITY_INSERT UserProfile OFF;
 -- Insert data into the Article table
 SET IDENTITY_INSERT Article ON;
 
-INSERT INTO Article (id, name)
+INSERT INTO Article (Id, Name)
 VALUES
 (1, 'Panda'),
 (2, 'Algorithm'),
@@ -171,7 +171,7 @@ SET IDENTITY_INSERT Article OFF;
 -- Insert data into the Game table
 SET IDENTITY_INSERT Game ON;
 
-INSERT INTO Game (id, userProfileId, startArticleId, endArticleId, stepCount, duration)
+INSERT INTO Game (Id, UserProfileId, StartArticleId, EndArticleId, StepCount, Duration)
 VALUES
 (1, 1, 1, 2, 5, 15),
 (2, 2, 3, 4, 7, 20),
@@ -182,7 +182,7 @@ SET IDENTITY_INSERT Game OFF;
 -- Insert data into the Message table
 SET IDENTITY_INSERT Message ON;
 
-INSERT INTO Message (id, userProfileId, content, timeStamp)
+INSERT INTO Message (Id, UserProfileId, Content, TimeStamp)
 VALUES
 (1, 1, 'This is the first message.', '2024-10-08 10:00:00'),
 (2, 2, 'Another message content here.', '2024-10-08 10:05:00'),

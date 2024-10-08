@@ -2,7 +2,7 @@
 
 namespace WikiWander.Models
 {
-    public class User
+    public class UserProfile
     {
         public int Id { get; set; }
 
