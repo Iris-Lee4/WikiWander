@@ -1,18 +1,18 @@
-﻿-- Insert data into the Users table
-SET IDENTITY_INSERT Users ON;
+﻿-- Insert data into the UserProfile table
+SET IDENTITY_INSERT UserProfile ON;
 
-INSERT INTO Users (id, firstName, lastName, displayName, email)
+INSERT INTO UserProfile (id, firstName, lastName, displayName, email)
 VALUES
 (1, 'John', 'Doe', 'johnd', 'john.doe@example.com'),
 (2, 'Jane', 'Smith', 'janes', 'jane.smith@example.com'),
 (3, 'Michael', 'Brown', 'michaelb', 'michael.brown@example.com');
 
-SET IDENTITY_INSERT Users OFF;
+SET IDENTITY_INSERT UserProfile OFF;
 
--- Insert data into the Articles table
-SET IDENTITY_INSERT Articles ON;
+-- Insert data into the Article table
+SET IDENTITY_INSERT Article ON;
 
-INSERT INTO Articles (id, name)
+INSERT INTO Article (id, name)
 VALUES
 (1, 'Panda'),
 (2, 'Algorithm'),
@@ -166,26 +166,26 @@ VALUES
 (150, 'Tapas');
 
 
-SET IDENTITY_INSERT Articles OFF;
+SET IDENTITY_INSERT Article OFF;
 
--- Insert data into the Games table
-SET IDENTITY_INSERT Games ON;
+-- Insert data into the Game table
+SET IDENTITY_INSERT Game ON;
 
-INSERT INTO Games (id, userId, startArticleId, endArticleId, stepCount, duration)
+INSERT INTO Game (id, userProfileId, startArticleId, endArticleId, stepCount, duration)
 VALUES
 (1, 1, 1, 2, 5, 15),
 (2, 2, 3, 4, 7, 20),
 (3, 3, 5, 1, 10, 30);
 
-SET IDENTITY_INSERT Games OFF;
+SET IDENTITY_INSERT Game OFF;
 
--- Insert data into the Messages table
-SET IDENTITY_INSERT Messages ON;
+-- Insert data into the Message table
+SET IDENTITY_INSERT Message ON;
 
-INSERT INTO Messages (id, userId, content, timeStamp)
+INSERT INTO Message (id, userProfileId, content, timeStamp)
 VALUES
 (1, 1, 'This is the first message.', '2024-10-08 10:00:00'),
 (2, 2, 'Another message content here.', '2024-10-08 10:05:00'),
 (3, 3, 'Yet another message for testing.', '2024-10-08 10:10:00');
 
-SET IDENTITY_INSERT Messages OFF;
+SET IDENTITY_INSERT Message OFF;

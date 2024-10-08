@@ -8,14 +8,14 @@ USE [WikiWander]
 GO
 
 
-DROP TABLE IF EXISTS [Users];
-DROP TABLE IF EXISTS [Articles];
-DROP TABLE IF EXISTS [Games];
-DROP TABLE IF EXISTS [Messages];
+DROP TABLE IF EXISTS [UserProfile];
+DROP TABLE IF EXISTS [Article];
+DROP TABLE IF EXISTS [Game];
+DROP TABLE IF EXISTS [Message];
 GO
 
--- Creating the Users table
-CREATE TABLE Users (
+-- Creating the User table
+CREATE TABLE UserProfile (
     id INT PRIMARY KEY IDENTITY(1,1),
     firstName NVARCHAR(50),
     lastName NVARCHAR(50),
@@ -23,26 +23,26 @@ CREATE TABLE Users (
     email NVARCHAR(100)
 );
 
--- Creating the Articles table
-CREATE TABLE Articles (
+-- Creating the Article table
+CREATE TABLE Article (
     id INT PRIMARY KEY IDENTITY(1,1),
     name NVARCHAR(255)
 );
 
--- Creating the Games table
-CREATE TABLE Games (
+-- Creating the Game table
+CREATE TABLE Game (
     id INT PRIMARY KEY IDENTITY(1,1),
-    userId INT FOREIGN KEY REFERENCES Users(id),
-    startArticleId INT FOREIGN KEY REFERENCES Articles(id),
-    endArticleId INT FOREIGN KEY REFERENCES Articles(id),
+    userProfileId INT FOREIGN KEY REFERENCES UserProfile(id),
+    startArticleId INT FOREIGN KEY REFERENCES Article(id),
+    endArticleId INT FOREIGN KEY REFERENCES Article(id),
     stepCount INT,
     duration INT
 );
 
--- Creating the Messages table
-CREATE TABLE Messages (
+-- Creating the Message table
+CREATE TABLE Message (
     id INT PRIMARY KEY IDENTITY(1,1),
-    userId INT FOREIGN KEY REFERENCES Users(id),
+    userProfileId INT FOREIGN KEY REFERENCES UserProfile(id),
     content NVARCHAR(MAX),
     timeStamp DATETIME
 );
