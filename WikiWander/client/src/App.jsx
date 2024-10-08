@@ -1,35 +1,113 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+
+  const [page, setPage] = useState({});
+
+  useEffect(() => {
+    if(page !== null) {
+      setPage(page)
+      console.log("i did it")
+    }
+  }, [page])
+
+  const showPage = async () => {
+
+    try{
+      const url = "https://en.wikipedia.org/w/api.php"
+
+      const params = new URLSearchParams({
+        action: 'parse',
+        prop: 'text',
+        origin: "*",
+        format: "json",
+        page: 'cat'
+      })
+
+      const res = await fetch(`${url}?${params}`)
+      .then((res) => res.json())
+      setPage(res);
+      console.log(res);
+      console.log(Object.keys(page.parse.text)[0]);
+      console.log(page.parse.text[Object.keys(page.parse.text)[0]])
+
+    } catch(e) {
+      console.error(e)
+    }
+  }
+  
   return (
     <>
+      <h1>Wiki Wander</h1>
+      <button
+      onClick={showPage}
+      >
+        push for cats
+      </button>
+      <div
+      dangerouslySetInnerHTML={{__html: page?.parse?.text[Object.keys(page.parse.text)[0]]}}
+      >
+        </div>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {page?.parse?.title}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
 
 export default App
+
+  // const searchWiki = async () => {
+  //   try {
+  //     const url = "https://en.wikipedia.org/w/api.php"
+
+  //     const params = new URLSearchParams({
+  //       action: 'query',
+  //       list: 'search',
+  //       srsearch: query,
+  //       format: 'json',
+  //       origin: "*"
+  //     })
+      
+  //   const res = await fetch(`${url}?${params}`)
+  //               .then((res) => res.json())
+
+  //       console.log(res)
+  //     if(res?.query?.search[0]?.title) {
+  //       console.log(res)
+  //       setPages(res?.query?.search)
+  //     }
+  //   } catch (e) {
+  //     console.error(e)
+  //   } 
+  // }
+
+        
+      {/* <input placeholder='Search...' value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      />
+      <button
+      onClick={searchWiki}
+      >Search</button> */}
+
+      {/* <div>
+      {pages?.map((page, idx) => (
+        <div
+        key={page.id}>
+        <p
+        >
+        {page?.title}
+        </p>
+        <button onClick={showPage(page)}>
+          show page
+        </button>
+        </div>
+      ))}
+
+</div> */}
+
+// const [query, setQuery] = useState('');
+// const [pages, setPages] = useState([]);
