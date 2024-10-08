@@ -48,7 +48,8 @@ namespace WikiWander.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand(){
+                using (var cmd = conn.CreateCommand())
+                {
                     cmd.CommandText = @"INSERT INTO UserProfile (FirstName, LastName, DisplayName, Email)
                       OUTPUT INSERTED.ID
                       VALUES (@FirstName, @LastName, @DisplayName, @Email)

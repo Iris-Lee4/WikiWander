@@ -18,9 +18,9 @@ namespace WikiWander.Controllers
         }
         // GET: api/<MessageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_messageRepository.GetAll());
         }
 
         // GET api/<MessageController>/5

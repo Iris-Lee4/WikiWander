@@ -58,7 +58,7 @@ namespace WikiWander.Repositories
                         SELECT m.Id, m.UserProfileId, u.DisplayName, m.Content, m.TimeStamp
                         FROM Message m
                         LEFT JOIN UserProfile u on m.UserProfileId = u.Id
-                        WHERE Id = @Id
+                        WHERE m.Id = @Id
                         ";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
