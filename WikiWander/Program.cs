@@ -1,4 +1,6 @@
 
+using WikiWander.Repositories;
+
 namespace WikiWander
 {
     public class Program
@@ -11,6 +13,12 @@ namespace WikiWander
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            //add repos 
+            builder.Services.AddTransient<IUserRepository, UserRepository>();
+            builder.Services.AddTransient<IMessageRepository, MessageRepository>();
+            builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+            builder.Services.AddTransient<IGameRepository, GameRepository>();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -21,12 +29,17 @@ namespace WikiWander
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseCors(options =>
+                {
+                    options.AllowAnyOrigin();
+                    options.AllowAnyMethod();
+                    options.AllowAnyHeader();
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
