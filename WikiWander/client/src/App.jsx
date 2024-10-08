@@ -23,7 +23,7 @@ function App() {
         prop: 'text',
         origin: "*",
         format: "json",
-        page: 'cats'
+        page: 'cat'
       })
 
       const res = await fetch(`${url}?${params}`)
@@ -46,9 +46,11 @@ function App() {
       >
         push for cats
       </button>
+      <div
+      dangerouslySetInnerHTML={{__html: page?.parse?.text[Object.keys(page.parse.text)[0]]}}
+      >
+        </div>
       <div>
-      {page.parse.text[Object.keys(page.parse.text)[0]]}
-
         {page?.parse?.title}
       </div>
 
