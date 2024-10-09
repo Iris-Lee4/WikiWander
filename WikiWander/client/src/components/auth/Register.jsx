@@ -1,36 +1,35 @@
 import { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { register } from "../Managers/UserProfileManager";
+import { register } from "../../services/userProfileService.jsx";
 
-export default function Register({ setIsLoggedIn }) {
+export const Register = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState();
+//   const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
+//   const [confirmPassword, setConfirmPassword] = useState();
 
   const registerClick = (e) => {
     e.preventDefault();
-    if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
-    } else {
+    // if (password && password !== confirmPassword) {
+    //   alert("Passwords don't match. Do better.");
+    // } else {
       const userProfile = {
         firstName,
         lastName,
         displayName,
-        imageLocation,
         email,
       };
       register(userProfile, password).then(() => {
         setIsLoggedIn(true);
         navigate("/");
       });
-    }
+    // }
   };
 
   return (
@@ -69,30 +68,11 @@ export default function Register({ setIsLoggedIn }) {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image</Label>
-          <Input
-            id="imageLocation"
-            type="file"
-            onChange={(e) => {
-              console.log(e.target.files[0]);
-              setImageLocation(URL.createObjectURL(e.target.files[0]))
-            }}
-          />
-        </FormGroup>
-        <FormGroup>
           <Label for="password">Password</Label>
           <Input
             id="password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </FormGroup>
         <FormGroup>

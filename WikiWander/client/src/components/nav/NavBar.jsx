@@ -33,7 +33,7 @@ export const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
                     className="nav-link"
                     style={{ cursor: "pointer" }}
                     onClick={() => {
-                      logout();
+                    //   logout();
                       setIsLoggedIn(false);
                     }}
                   >
