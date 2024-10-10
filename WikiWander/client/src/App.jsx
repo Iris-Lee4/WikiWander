@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
 import { useEffect } from 'react';
 import { NavBar } from './components/nav/NavBar.jsx';
 import { Authorize } from './views/Authorize.jsx';
 import { ApplicationViews } from './views/ApplicationViews.jsx';
+import { BrowserRouter } from 'react-router-dom';
+
 
 export const App = () =>  {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -26,15 +27,13 @@ export const App = () =>  {
     }, [isLoggedIn])
 
     return (
-        <Router>
+        <BrowserRouter>
             <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} currentUser={currentUser}/>
             {isLoggedIn ?
                 <ApplicationViews currentUser={currentUser} />
                 :
                 <Authorize setIsLoggedIn={setIsLoggedIn} />
             }
-        </Router>
+        </BrowserRouter>
     );
 }
-
-export default App;

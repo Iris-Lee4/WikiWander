@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Container } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/userProfileService.jsx";
 
@@ -25,7 +25,7 @@ export const Register = ({ setIsLoggedIn }) => {
         displayName,
         email,
       };
-      register(userProfile, password).then(() => {
+      register(userProfile).then(() => {
         setIsLoggedIn(true);
         navigate("/");
       });
@@ -33,52 +33,54 @@ export const Register = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <Form onSubmit={registerClick}>
-      <fieldset>
-        <FormGroup>
-          <Label htmlFor="firstName">First Name</Label>
-          <Input
-            id="firstName"
-            type="text"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input
-            id="lastName"
-            type="text"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="displayName">Display Name</Label>
-          <Input
-            id="displayName"
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            id="email"
-            type="text"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Button>Register</Button>
-        </FormGroup>
-      </fieldset>
-    </Form>
+    <Container>
+      <Form onSubmit={registerClick}>
+        <fieldset>
+          <FormGroup>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input
+              id="firstName"
+              type="text"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
+              id="lastName"
+              type="text"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="displayName">Display Name</Label>
+            <Input
+              id="displayName"
+              type="text"
+              onChange={(e) => setDisplayName(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input
+              id="email"
+              type="text"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
+          {/* <FormGroup>
+            <Label for="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormGroup> */}
+          <FormGroup>
+            <Button>Register</Button>
+          </FormGroup>
+        </fieldset>
+      </Form>
+    </Container>
   );
 }
