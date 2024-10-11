@@ -58,7 +58,7 @@ const setArticlesForGame = () => {
     }
   }, [articles])
 
-  const showPage = async (start) => {
+  const showPage = async (articleName) => {
 
     try{
       const url = "https://en.wikipedia.org/w/api.php"
@@ -68,7 +68,7 @@ const setArticlesForGame = () => {
         prop: 'text',
         origin: "*",
         format: "json",
-        page: `${start}`
+        page: `${articleName}`
       })
 
       const res = await fetch(`${url}?${params}`)
@@ -76,7 +76,7 @@ const setArticlesForGame = () => {
       setPage(res);
       // console.log(res);
       // console.log(Object.keys(page.parse.text)[0]);
-       console.log(page.parse.text[Object.keys(page.parse.text)[0]])
+      //  console.log(page.parse.text[Object.keys(page.parse.text)[0]])
        setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
       setGameActivated(true);
 
@@ -107,7 +107,6 @@ const setArticlesForGame = () => {
               )}
               <div>
               <GameSheet board={currentBoard} showPage={showPage}/>
-              
                 </div>
               <div>
                 {page?.parse?.title}
