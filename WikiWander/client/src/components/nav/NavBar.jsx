@@ -7,11 +7,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
+  NavLink
 } from "reactstrap";
 import { logout } from "../../services/userProfileService.jsx";
 
@@ -23,7 +19,7 @@ export const NavBar = ({ isLoggedIn, setIsLoggedIn, currentUser }) => {
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand tag={RRNavLink} to="/">
-          Tabloid
+          Wiki Wander
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
