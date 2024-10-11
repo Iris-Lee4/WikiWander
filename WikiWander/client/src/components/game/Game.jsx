@@ -11,9 +11,9 @@ const [gameActivated, setGameActivated] = useState(false);
 const [articles, setArticles] = useState([]);
 const [startArticle, setStartArticle] = useState({});
 const [endArticle, setEndArticle] = useState({});
+const [currentArticle, setCurrentArticle] = useState({});
 
-
-const getAndShuffleArticles = async () => {
+const getAndShuffleArticles = () => {
 
   const shuffle = (array) => {
     for (var i = array.length - 1; i > 0; i--) {
@@ -24,34 +24,13 @@ const getAndShuffleArticles = async () => {
     }
   }
 
-  await getAllArticles()
+   getAllArticles()
     .then(articleArray => {
       shuffle(articleArray)
   setArticles(articleArray)
+  return articleArray
   })
-
-  console.log(articles[0]);
 };
-
-useEffect(() => {
-  getAndShuffleArticles();
-},[])
-
-// const shuffle = (array) => {
-//   let currentIndex = array.length;
-
-//   // While there remain elements to shuffle...
-//   while (currentIndex != 0) {
-
-//     // Pick a remaining element...
-//     let randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex--;
-
-//     // And swap it with the current element.
-//     [array[currentIndex], array[randomIndex]] = [
-//       array[randomIndex], array[currentIndex]];
-//   }
-// }
 
 const setArticlesForGame = () => {
   const firstArticle = articles[0]
@@ -67,6 +46,16 @@ const setArticlesForGame = () => {
   //   }
   // }, [page])
 
+  useEffect(() => {
+    getAndShuffleArticles()
+  },[])
+  
+  useEffect(() => {
+    if (articles) {
+      setArticlesForGame();
+    }
+  }, [articles])
+
   const showPage = async () => {
 
     try{
@@ -77,7 +66,7 @@ const setArticlesForGame = () => {
         prop: 'text',
         origin: "*",
         format: "json",
-        page: 'cat'
+        page: `${startArticle.name}`
       })
 
       const res = await fetch(`${url}?${params}`)
@@ -105,18 +94,12 @@ const setArticlesForGame = () => {
               <p>{endArticle?.name}</p>
             </Col>
             <Col>
-            {/* button to start game by picking articles */}
-            <Button
-            onClick={setArticlesForGame}
-            >
-              Push for Articles
-            </Button>
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
                 <Button
               onClick={showPage}
               >
-                push for cats
+                Start Game
               </Button>
               )}
               <div
