@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { Button, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
+import { GameSheet } from "./gamesheet.jsx";
 
 export const Game = () => {
 const [page, setPage] = useState({});
@@ -12,6 +13,7 @@ const [articles, setArticles] = useState([]);
 const [startArticle, setStartArticle] = useState({});
 const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
+const [currentBoard, setCurrentBoard] = useState(null);
 
 const getAndShuffleArticles = () => {
 
@@ -56,7 +58,7 @@ const setArticlesForGame = () => {
     }
   }, [articles])
 
-  const showPage = async () => {
+  const showPage = async (start) => {
 
     try{
       const url = "https://en.wikipedia.org/w/api.php"
@@ -66,7 +68,7 @@ const setArticlesForGame = () => {
         prop: 'text',
         origin: "*",
         format: "json",
-        page: `${startArticle.name}`
+        page: `${start}`
       })
 
       const res = await fetch(`${url}?${params}`)
@@ -74,7 +76,8 @@ const setArticlesForGame = () => {
       setPage(res);
       // console.log(res);
       // console.log(Object.keys(page.parse.text)[0]);
-      // console.log(page.parse.text[Object.keys(page.parse.text)[0]])
+       console.log(page.parse.text[Object.keys(page.parse.text)[0]])
+       setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
       setGameActivated(true);
 
     } catch(e) {
@@ -97,14 +100,14 @@ const setArticlesForGame = () => {
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
                 <Button
-              onClick={showPage}
+              onClick={() => showPage(startArticle.name)}
               >
                 Start Game
               </Button>
               )}
-              <div
-              dangerouslySetInnerHTML={{__html: page?.parse?.text[Object.keys(page.parse.text)[0]]}}
-              >
+              <div>
+              <GameSheet board={currentBoard} showPage={showPage}/>
+              
                 </div>
               <div>
                 {page?.parse?.title}
