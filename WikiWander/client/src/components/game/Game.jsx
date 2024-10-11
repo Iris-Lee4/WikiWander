@@ -7,6 +7,14 @@ import { Button, Col } from "reactstrap";
 export const Game = () => {
 const [page, setPage] = useState({});
 const [gameActivated, setGameActivated] = useState(false);
+const [articles, setArticles] = useState([]);
+const [startArticle, setStartArticle] = useState('');
+const [endArticle, setEndArticle] = useState('');
+
+
+const pickArticles = () => {
+
+}
 
   // useEffect(() => {
   //   if(page !== null) {
