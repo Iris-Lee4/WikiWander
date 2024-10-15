@@ -15,6 +15,7 @@ const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
 const [currentBoard, setCurrentBoard] = useState(null);
 
+//method to shuffle articles so that two random and distinct articles are selected for gameplay
 const getAndShuffleArticles = () => {
 
   const shuffle = (array) => {
@@ -34,6 +35,7 @@ const getAndShuffleArticles = () => {
   })
 };
 
+//select start and end articles for game
 const setArticlesForGame = () => {
   const firstArticle = articles[0]
   const secondArticle = articles[1]
@@ -53,12 +55,18 @@ const setArticlesForGame = () => {
   },[])
   
   useEffect(() => {
-    if (articles) {
+    if(articles) {
       setArticlesForGame();
     }
   }, [articles])
 
-  const showPage = async (articleName) => {
+  useEffect(() => {
+    if(page) {
+      setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]]);
+    }
+  }, [page])
+
+  const fetchPage = async (articleName) => {
 
     try{
       const url = "https://en.wikipedia.org/w/api.php"
@@ -74,10 +82,10 @@ const setArticlesForGame = () => {
       const res = await fetch(`${url}?${params}`)
       .then((res) => res.json())
       setPage(res);
-      // console.log(res);
+      console.log(res);
       // console.log(Object.keys(page.parse.text)[0]);
       //  console.log(page.parse.text[Object.keys(page.parse.text)[0]])
-       setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
+      // setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
       setGameActivated(true);
 
     } catch(e) {
@@ -100,14 +108,16 @@ const setArticlesForGame = () => {
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
                 <Button
-              onClick={() => showPage(startArticle.name)}
+              onClick={() => fetchPage(startArticle.name)}
               >
                 Start Game
               </Button>
               )}
+
+              {/* to display wiki page */}
               <div>
-              <GameSheet board={currentBoard} showPage={showPage}/>
-                </div>
+                <GameSheet board={currentBoard} fetchPage={fetchPage}/>
+              </div>
               <div>
                 {page?.parse?.title}
               </div>
