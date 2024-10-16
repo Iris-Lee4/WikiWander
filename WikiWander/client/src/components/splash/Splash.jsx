@@ -13,19 +13,19 @@ export const Splash = () => {
                 <h6>HOW TO PLAY</h6>
             </div>
             <div>
-                <h8>
+                <p>
                     There will be a start article & an end article. The goal is to get from the Wikipedia page of the start article and reach the Wikipedia page of the end article.
-                </h8>
+                </p>
             </div>
             <div>
-                <h8>
+                <p>
                     Use the links within the Wikipedia page that you are on to get to another Wikipedia page. Crawl through page by page until you reach the end article's page.
-                </h8>
+                </p>
             </div>
             <div>
-                <h8>
+                <p>
                     That's it! 
-                </h8>
+                </p>
             </div>
             <Button
             onClick={() => {navigate('/game')}}
