@@ -6,6 +6,7 @@ import { Button, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
 import { GameSheet } from "./gamesheet.jsx";
 import { addGame, updateGame } from "../../services/gameService.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Game = ({ currentUser }) => {
 const [page, setPage] = useState({});
@@ -16,7 +17,11 @@ const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
 const [currentBoard, setCurrentBoard] = useState(null);
 const [game, setGame] = useState({});
+const [gameWon, setGameWon] = useState(false);
 // const [stepCount, setStepCount] = useState('');
+
+const navigate = useNavigate();
+
 
 //method to shuffle articles so that two random and distinct articles are selected for gameplay
 const getAndShuffleArticles = () => {
@@ -68,6 +73,12 @@ const setArticlesForGame = () => {
       setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]]);
     }
   }, [page])
+
+  useEffect(() => {
+    if(currentArticle == endArticle.name) {
+      navigate('/winner')
+    }
+  }, [currentArticle])
   
   const newGame = () => {
     const gameObj = {
@@ -122,6 +133,7 @@ const setArticlesForGame = () => {
       // console.log(Object.keys(page.parse.text)[0]);
       //  console.log(page.parse.text[Object.keys(page.parse.text)[0]])
       // setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
+      setCurrentArticle(articleName);
     } catch(e) {
       console.error(e)
     }
@@ -156,13 +168,9 @@ const setArticlesForGame = () => {
                 Start Game
               </Button>
               )}
-
               {/* to display wiki page */}
               <div>
                 <GameSheet board={currentBoard} fetchPage={fetchPage} handleGameChange={handleGameChange} game={game} />
-              </div>
-              <div>
-                {page?.parse?.title}
               </div>
             </Col>
           </Row>
