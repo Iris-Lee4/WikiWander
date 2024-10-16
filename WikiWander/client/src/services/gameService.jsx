@@ -8,6 +8,7 @@ export const addGame = (game) => {
         },
         body: JSON.stringify(game),
     })
+    .then(res => res.json())
 };
 
 export const getAllByUserId = (userId) => {
@@ -21,7 +22,7 @@ export const getGameById = (id) => {
 };
 
 export const updateGame = (game) => {
-    return fetch(`${apiUrl}/${game.id}`, {
+    return fetch(`${apiUrl}/${game.Id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

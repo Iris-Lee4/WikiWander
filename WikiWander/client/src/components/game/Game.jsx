@@ -5,7 +5,7 @@ import { Container, Row } from "react-bootstrap";
 import { Button, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
 import { GameSheet } from "./gamesheet.jsx";
-import { addGame } from "../../services/gameService.jsx";
+import { addGame, updateGame } from "../../services/gameService.jsx";
 
 export const Game = ({ currentUser }) => {
 const [page, setPage] = useState({});
@@ -16,6 +16,7 @@ const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
 const [currentBoard, setCurrentBoard] = useState(null);
 const [game, setGame] = useState({});
+// const [stepCount, setStepCount] = useState('');
 
 //method to shuffle articles so that two random and distinct articles are selected for gameplay
 const getAndShuffleArticles = () => {
@@ -72,11 +73,33 @@ const setArticlesForGame = () => {
     const gameObj = {
       userProfileId: currentUser.id,
       startArticleId: startArticle.id,
-      endArticleId: endArticle.id
+      endArticleId: endArticle.id,
+      stepCount: 0
     }
-    addGame(gameObj).then(() => {
-      fetchPage(startArticle.name)
+    
+    addGame(gameObj).then((res) => {
+      // setGameId(res.id)
+      const newGameObj = {
+        Id: res.id,
+        userProfileId: currentUser.id,
+        startArticleId: startArticle.id,
+        endArticleId: endArticle.id,
+        stepCount: 0
+      }
+
+      setGame(newGameObj);
     })
+
+    fetchPage(startArticle.name)
+    // setGame(gameObj);
+    // setStepCount(gameObj.stepCount);
+  }
+
+  const handleGameChange = () => {
+    const copy = { ...game }
+    copy.stepCount = game.stepCount + 1
+    setGame(copy)
+    updateGame(copy)
   }
 
   const fetchPage = async (articleName) => {
@@ -99,8 +122,6 @@ const setArticlesForGame = () => {
       // console.log(Object.keys(page.parse.text)[0]);
       //  console.log(page.parse.text[Object.keys(page.parse.text)[0]])
       // setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
-      setGameActivated(true);
-
     } catch(e) {
       console.error(e)
     }
@@ -116,12 +137,21 @@ const setArticlesForGame = () => {
               <p>{startArticle?.name}</p>
               <h3>End Article</h3>
               <p>{endArticle?.name}</p>
+              {gameActivated === true && (
+                <div>
+                <h3># Steps</h3>
+                <p>{game.stepCount}</p>
+                </div>
+               )}
             </Col>
             <Col>
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
                 <Button
-              onClick={() => newGame()}
+              onClick={() => {
+                newGame()
+                setGameActivated(true);
+              }}
               >
                 Start Game
               </Button>
@@ -129,7 +159,7 @@ const setArticlesForGame = () => {
 
               {/* to display wiki page */}
               <div>
-                <GameSheet board={currentBoard} fetchPage={fetchPage}/>
+                <GameSheet board={currentBoard} fetchPage={fetchPage} handleGameChange={handleGameChange} game={game} />
               </div>
               <div>
                 {page?.parse?.title}

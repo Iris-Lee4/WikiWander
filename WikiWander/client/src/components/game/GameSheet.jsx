@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "./GameSheet.css"
 
-export const GameSheet = ({ board, fetchPage }) => {
+export const GameSheet = ({ board, fetchPage, handleGameChange, game }) => {
   const myRef = useRef(null);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ export const GameSheet = ({ board, fetchPage }) => {
         {
             // e.preventDefault();
             fetchPage(e.target.name);
+            handleGameChange();
             //  fetchPage(e.target.name.split("/")[2]);   
     }}>
       <span ref={myRef} />
