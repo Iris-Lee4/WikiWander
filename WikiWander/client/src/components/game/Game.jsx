@@ -14,6 +14,7 @@ const [startArticle, setStartArticle] = useState({});
 const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
 const [currentBoard, setCurrentBoard] = useState(null);
+const [game, setGame] = useState({});
 
 //method to shuffle articles so that two random and distinct articles are selected for gameplay
 const getAndShuffleArticles = () => {
@@ -65,6 +66,14 @@ const setArticlesForGame = () => {
       setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]]);
     }
   }, [page])
+  
+  const newGame = () => {
+    const gameObj = {
+      userProfileId: currentUser.id,
+      startArticleId: startArticle.id,
+      endArticleId: endArticle.id
+    }
+  }
 
   const fetchPage = async (articleName) => {
 
