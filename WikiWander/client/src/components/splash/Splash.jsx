@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Button, Container } from "reactstrap"
 
-export const Splash = () => {
+export const Splash = ( { currentUser }) => {
 
     const navigate = useNavigate();
 
