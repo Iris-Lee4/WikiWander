@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "./GameSheet.css"
 
-export const GameSheet = ({ board, fetchPage, handleGameChange, game }) => {
+export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
   const myRef = useRef(null);
 
   useEffect(() => {
