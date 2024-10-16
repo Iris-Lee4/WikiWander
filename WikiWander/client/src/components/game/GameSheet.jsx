@@ -12,7 +12,7 @@ export const GameSheet = ({ board, fetchPage }) => {
     newBoard = newBoard.replace(/href="\/wiki\//g, 'class="clickable" name="');
 
     myRef.current.innerHTML = newBoard;
-    console.log(newBoard);
+    // console.log(newBoard);
     }
   }, [myRef, board]);
 

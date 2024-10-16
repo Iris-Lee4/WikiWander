@@ -5,6 +5,7 @@ import { Container, Row } from "react-bootstrap";
 import { Button, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
 import { GameSheet } from "./gamesheet.jsx";
+import { addGame } from "../../services/gameService.jsx";
 
 export const Game = ({ currentUser }) => {
 const [page, setPage] = useState({});
@@ -73,6 +74,9 @@ const setArticlesForGame = () => {
       startArticleId: startArticle.id,
       endArticleId: endArticle.id
     }
+    addGame(gameObj).then(() => {
+      fetchPage(startArticle.name)
+    })
   }
 
   const fetchPage = async (articleName) => {
@@ -91,7 +95,7 @@ const setArticlesForGame = () => {
       const res = await fetch(`${url}?${params}`)
       .then((res) => res.json())
       setPage(res);
-      console.log(res);
+      // console.log(res);
       // console.log(Object.keys(page.parse.text)[0]);
       //  console.log(page.parse.text[Object.keys(page.parse.text)[0]])
       // setCurrentBoard(page?.parse?.text[Object.keys(page.parse.text)[0]])
@@ -117,7 +121,7 @@ const setArticlesForGame = () => {
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
                 <Button
-              onClick={() => fetchPage(startArticle.name)}
+              onClick={() => newGame()}
               >
                 Start Game
               </Button>
