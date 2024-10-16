@@ -6,7 +6,7 @@ import { Button, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
 import { GameSheet } from "./gamesheet.jsx";
 
-export const Game = () => {
+export const Game = ({ currentUser }) => {
 const [page, setPage] = useState({});
 const [gameActivated, setGameActivated] = useState(false);
 const [articles, setArticles] = useState([]);
