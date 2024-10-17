@@ -30,6 +30,11 @@ export const register = (userObject) => {
       });
   };
 
-  export const logout = () => {
+export const logout = () => {
     localStorage.clear()
+};
+
+export const getUserById = (id) => {
+  return fetch(`${apiUrl}/${id}`)
+  .then((res) => res.json())
 };
