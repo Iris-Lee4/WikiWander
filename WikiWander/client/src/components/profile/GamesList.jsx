@@ -24,6 +24,14 @@ export const GamesList = ({ args, currentUser }) => {
         return date.toLocaleDateString('en-US')
     };
 
+    const formatBool = (bool) => {
+        if(bool === true ) {
+            return ':)'
+        } else {
+            return ":'("
+        }
+    }
+
     const handleDelete = (gameId) => {
         deleteGame(gameId)
         .then(document.location.reload())
@@ -53,6 +61,9 @@ export const GamesList = ({ args, currentUser }) => {
                 # Steps
               </th>
               <th>
+                Completed
+              </th>
+              <th>
                 Remove
               </th>
             </tr>
@@ -75,6 +86,9 @@ export const GamesList = ({ args, currentUser }) => {
                         </td>
                         <td>
                             {game.stepCount}
+                        </td>
+                        <td>
+                            {formatBool(game.completed)}
                         </td>
                         <td>
                             <Button color="danger" onClick={() => {

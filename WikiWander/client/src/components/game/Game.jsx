@@ -17,8 +17,6 @@ const [endArticle, setEndArticle] = useState({});
 const [currentArticle, setCurrentArticle] = useState({});
 const [currentBoard, setCurrentBoard] = useState(null);
 const [game, setGame] = useState({});
-const [gameWon, setGameWon] = useState(false);
-// const [stepCount, setStepCount] = useState('');
 
 const navigate = useNavigate();
 
@@ -52,12 +50,6 @@ const setArticlesForGame = () => {
   setEndArticle(secondArticle);
   };
 
-  // useEffect(() => {
-  //   if(page !== null) {
-  //     setPage(page)
-  //   }
-  // }, [page])
-
   useEffect(() => {
     getAndShuffleArticles()
   },[])
@@ -74,9 +66,14 @@ const setArticlesForGame = () => {
     }
   }, [page])
 
+  //track if won
   useEffect(() => {
     if(currentArticle == endArticle.name) {
-      navigate('/winner')
+      const copy = { ...game }
+    copy.completed = true
+    // setGame(copy)
+    updateGame(copy)
+    navigate('/winner')
     }
   }, [currentArticle])
   
@@ -85,7 +82,8 @@ const setArticlesForGame = () => {
       userProfileId: currentUser.id,
       startArticleId: startArticle.id,
       endArticleId: endArticle.id,
-      stepCount: 0
+      stepCount: 0,
+      completed: false
     }
     
     addGame(gameObj).then((res) => {
@@ -95,7 +93,8 @@ const setArticlesForGame = () => {
         userProfileId: currentUser.id,
         startArticleId: startArticle.id,
         endArticleId: endArticle.id,
-        stepCount: 0
+        stepCount: 0,
+        completed: false
       }
 
       setGame(newGameObj);
