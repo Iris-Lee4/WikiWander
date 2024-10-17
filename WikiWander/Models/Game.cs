@@ -11,6 +11,7 @@
         public Article? EndArticle { get; set; }
         public int StepCount { get; set; }
         public int Duration { get; set; }
+        public DateTime TimeStamp { get; set; }
 
     }
 }

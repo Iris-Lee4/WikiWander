@@ -52,6 +52,7 @@ namespace WikiWander.Controllers
         [HttpPost]
         public IActionResult Post(Game game)
         {
+            game.TimeStamp = DateTime.Now;
             _gameRepository.Add(game);
             return CreatedAtAction("Get", new { id = game.Id }, game);
         }
