@@ -38,6 +38,11 @@ export const NavBar = ({ isLoggedIn, setIsLoggedIn, currentUser }) => {
                   </NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={RRNavLink} to="/profile">
+                    Profile
+                  </NavLink>
+                </NavItem>
+                <NavItem>
                   <a
                     aria-current="page"
                     className="nav-link"
