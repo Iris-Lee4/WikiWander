@@ -67,7 +67,7 @@ namespace WikiWander.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article'
+                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article', g.timeStamp
                         FROM Game g
                         LEFT JOIN UserProfile u on g.UserProfileId = u.Id
                         LEFT JOIN Article s ON s.Id = g.StartArticleId
@@ -102,7 +102,8 @@ namespace WikiWander.Repositories
                                 Name = DbUtils.GetString(reader, "End Article"),
                             },
                             StepCount = DbUtils.GetInt(reader, "StepCount"),
-                            Duration = DbUtils.GetInt(reader, "Duration")
+                            Duration = DbUtils.GetInt(reader, "Duration"),
+                            TimeStamp = DbUtils.GetDateTime(reader, "TimeStamp")
 
                         });
                     }
