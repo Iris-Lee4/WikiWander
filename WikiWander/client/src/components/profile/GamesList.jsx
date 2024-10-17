@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ListGroup, ListGroupItem } from "reactstrap"
+import { ListGroup, ListGroupItem, Table } from "reactstrap"
 import { getAllByUserId } from "../../services/gameService.jsx";
 
 export const GamesList = ({ currentUser }) => {
@@ -8,7 +8,6 @@ export const GamesList = ({ currentUser }) => {
     const[gamesLoaded, setGamesLoaded] = useState(false);
 
     const getGamesByUser = () => {
-        console.log(currentUser)
         getAllByUserId(currentUser.id).then(gamesArray => setGames(gamesArray));
         setGamesLoaded(true)
     };
@@ -17,22 +16,51 @@ export const GamesList = ({ currentUser }) => {
         if(currentUser.id){
             getGamesByUser();
         }
-    }, []);
+    }, [currentUser]);
     
     return(
-        <ListGroup>
-            {gamesLoaded === true && (
+        <Table
+        >
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Start Article
+              </th>
+              <th>
+                End Article
+              </th>
+              <th>
+                # Steps
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+          {gamesLoaded === true && (
                 <>
                 {games.map((game) => (
-                    <ListGroupItem
+                    <tr
                         key={game.id}
                     >
-                        {game.id}
-                    </ListGroupItem>
+                        <th scope="row">
+                            {game.timeStamp}                            
+                        </th>
+                        <td>
+                            {game.startArticle.name}
+                        </td>
+                        <td>
+                            {game.endArticle.name}
+                        </td>
+                        <td>
+                            {game.stepCount}
+                        </td>
+                    </tr>
                 ))}
                 </>
             )}
-           
-        </ListGroup>
+          </tbody>
+        </Table>
     )
 }
