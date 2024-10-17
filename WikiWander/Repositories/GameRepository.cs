@@ -67,7 +67,7 @@ namespace WikiWander.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article', g.timeStamp
+                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article', g.TimeStamp, g.Completed
                         FROM Game g
                         LEFT JOIN UserProfile u on g.UserProfileId = u.Id
                         LEFT JOIN Article s ON s.Id = g.StartArticleId
@@ -103,7 +103,8 @@ namespace WikiWander.Repositories
                             },
                             StepCount = DbUtils.GetInt(reader, "StepCount"),
                             Duration = DbUtils.GetInt(reader, "Duration"),
-                            TimeStamp = DbUtils.GetDateTime(reader, "TimeStamp")
+                            TimeStamp = DbUtils.GetDateTime(reader, "TimeStamp"),
+                            Completed = DbUtils.GetBoolean(reader, "Completed")
 
                         });
                     }
@@ -123,7 +124,7 @@ namespace WikiWander.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article', g.TimeStamp
+                        SELECT g.Id, g.UserProfileId, u.DisplayName, g.StartArticleId, g.EndArticleId, g.StepCount, g.Duration, s.Name as 'Start Article', e.Name as 'End Article', g.TimeStamp, g.Completed
                         FROM Game g
                         LEFT JOIN UserProfile u on g.UserProfileId = u.Id
                         LEFT JOIN Article s ON s.Id = g.StartArticleId
@@ -159,7 +160,8 @@ namespace WikiWander.Repositories
                             },
                             StepCount = DbUtils.GetInt(reader, "StepCount"),
                             Duration = DbUtils.GetInt(reader, "Duration"),
-                            TimeStamp = DbUtils.GetDateTime(reader, "TimeStamp")
+                            TimeStamp = DbUtils.GetDateTime(reader, "TimeStamp"),
+                            Completed = DbUtils.GetBoolean(reader, "Completed")
 
                         };
                     }
@@ -178,9 +180,9 @@ namespace WikiWander.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                     INSERT INTO Game (UserProfileId, StartArticleId, EndArticleId, StepCount, Duration, TimeStamp)
+                     INSERT INTO Game (UserProfileId, StartArticleId, EndArticleId, StepCount, Duration, TimeStamp, Completed)
                      OUTPUT INSERTED.ID
-                     VALUES (@UserProfileId, @StartArticleId, @EndArticleId, @StepCount, @Duration, @TimeStamp)
+                     VALUES (@UserProfileId, @StartArticleId, @EndArticleId, @StepCount, @Duration, @TimeStamp, @Completed)
                      ";
                     DbUtils.AddParameter(cmd, "@UserProfileId", game.UserProfileId);
                     DbUtils.AddParameter(cmd, "@StartArticleId", game.StartArticleId);
@@ -188,6 +190,7 @@ namespace WikiWander.Repositories
                     DbUtils.AddParameter(cmd, "@StepCount", game.StepCount);
                     DbUtils.AddParameter(cmd, "@Duration", game.Duration);
                     DbUtils.AddParameter(cmd, "@TimeStamp", game.TimeStamp);
+                    DbUtils.AddParameter(cmd, "@Completed", game.Completed);
 
                     game.Id = (int)cmd.ExecuteScalar();
                 }
@@ -206,7 +209,8 @@ namespace WikiWander.Repositories
                                StartArticleId = @StartArticleId,
                                EndArticleId = @EndArticleId,
                                StepCount = @StepCount,
-                               Duration = @Duration
+                               Duration = @Duration,
+                               Completed = @Completed
                          WHERE Id = @Id"
                     ;
 
@@ -216,6 +220,7 @@ namespace WikiWander.Repositories
                     DbUtils.AddParameter(cmd, "@StepCount", game.StepCount);
                     DbUtils.AddParameter(cmd, "@Duration", game.Duration);
                     DbUtils.AddParameter(cmd, "@Id", game.Id);
+                    DbUtils.AddParameter(cmd, "@Completed", game.Completed);
 
                     cmd.ExecuteNonQuery();
                 }

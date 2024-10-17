@@ -12,6 +12,7 @@
         public int StepCount { get; set; }
         public int Duration { get; set; }
         public DateTime TimeStamp { get; set; }
+        public bool Completed { get; set; }
 
     }
 }

@@ -22,7 +22,6 @@ export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
             // e.preventDefault();
             fetchPage(e.target.name);
             handleGameChange();
-            //  fetchPage(e.target.name.split("/")[2]);   
     }}>
       <span ref={myRef} />
     </div>
