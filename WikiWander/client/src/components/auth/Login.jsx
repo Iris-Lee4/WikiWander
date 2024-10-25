@@ -24,23 +24,25 @@ export const Login = ({ setIsLoggedIn }) => {
   };
 
   return (
-    <Container>
-    <Form onSubmit={loginSubmit}>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-        </FormGroup>
-        {/* <FormGroup>
-          <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
-        </FormGroup> */}
-        <FormGroup>
-          <Button>Login</Button>
-        </FormGroup>
-        <em>
-          Not registered? <Link to="/register">Register</Link>
-        </em>
-    </Form>
+    <Container
+      fluid
+    >
+      <Form onSubmit={loginSubmit}>
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
+          </FormGroup>
+          {/* <FormGroup>
+            <Label for="password">Password</Label>
+            <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          </FormGroup> */}
+          <FormGroup>
+            <Button>Login</Button>
+          </FormGroup>
+          <em>
+            Not registered? <Link to="/register">Register</Link>
+          </em>
+      </Form>
     </Container>
   );
 }
