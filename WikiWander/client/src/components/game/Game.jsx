@@ -142,7 +142,7 @@ const setArticlesForGame = () => {
     <>
       <Container>
       {/* <h1>NEW GAME</h1> */}
-          <Row xs="auto">
+          <Row xs="2">
             <Col className="game_details">
               <h3>Start Article</h3>
               <p>{startArticle?.name}</p>
@@ -157,12 +157,11 @@ const setArticlesForGame = () => {
             </Col>
             <Col 
               className="game_board"
-              xs="auto"
               >
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
               <>
-              <Card
+              {/* <Card
                 style={{
                   width: '30rem'
                 }}
@@ -173,7 +172,7 @@ const setArticlesForGame = () => {
                   top
                   width="100%"
                 />
-              </Card>
+              </Card> */}
 
                 <Button
                 className="button"

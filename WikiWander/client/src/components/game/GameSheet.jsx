@@ -17,7 +17,9 @@ export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
   }, [myRef, board]);
 
   return (
-    <div onClick={(e) => 
+    <div 
+    className="game_board--sheet"
+    onClick={(e) => 
         {
             // e.preventDefault();
             fetchPage(e.target.name);
