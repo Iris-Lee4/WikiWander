@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button, Modal, ModalFooter, ModalHeader, Table } from "reactstrap"
 import { deleteGame, getAllByUserId } from "../../services/gameService.jsx";
+import "./Profile.css"
 
 export const GamesList = ({ args, currentUser }) => {
 

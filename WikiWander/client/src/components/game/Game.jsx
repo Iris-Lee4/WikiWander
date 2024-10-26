@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import { Button, Col } from "reactstrap";
+import { Button, Card, CardImg, Col } from "reactstrap";
 import { getAllArticles } from "../../services/articleService.jsx";
 import { GameSheet } from "./gamesheet.jsx";
 import { addGame, updateGame } from "../../services/gameService.jsx";
@@ -141,9 +141,9 @@ const setArticlesForGame = () => {
   return (
     <>
       <Container>
-      <h1>NEW GAME</h1>
-          <Row xs={2}>
-            <Col>
+      {/* <h1>NEW GAME</h1> */}
+          <Row xs="auto">
+            <Col className="game_details">
               <h3>Start Article</h3>
               <p>{startArticle?.name}</p>
               <h3>End Article</h3>
@@ -155,10 +155,28 @@ const setArticlesForGame = () => {
                 </div>
                )}
             </Col>
-            <Col>
+            <Col 
+              className="game_board"
+              xs="auto"
+              >
             {/* have button show when game activated and articles are set */}
             {gameActivated === false && (
+              <>
+              <Card
+                style={{
+                  width: '30rem'
+                }}
+              >
+                <CardImg
+                  alt="Card image cap"
+                  src="https://picsum.photos/id/135/318/180?grayscale&blur=10"
+                  top
+                  width="100%"
+                />
+              </Card>
+
                 <Button
+                className="button"
               onClick={() => {
                 newGame()
                 setGameActivated(true);
@@ -166,7 +184,12 @@ const setArticlesForGame = () => {
               >
                 Start Game
               </Button>
+              </>
               )}
+              <div>
+              {/* <GamePlaceholder /> */}
+              </div>
+              
               {/* to display wiki page */}
               <div>
                 <GameSheet board={currentBoard} fetchPage={fetchPage} handleGameChange={handleGameChange} game={game} />

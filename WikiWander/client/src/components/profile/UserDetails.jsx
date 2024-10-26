@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Container } from "reactstrap"
 import { getUserById } from "../../services/userProfileService.jsx";
+import "./Profile.css"
 
 export const UserDetails = ( { currentUser }) => {
     

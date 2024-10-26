@@ -1,0 +1,25 @@
+.gamesheet-clickable {
+    color: blue;
+}
+
+.mw-redirect {
+    color: black;
+}
+
+.button {
+    /* align-items: center; */
+    margin: auto;
+    width: 50%;
+}
+
+.game_details {
+    border: 8px solid black;
+    padding: 1rem;
+
+}
+
+.game_board {
+    border: 8px solid black;
+    padding: 1rem;
+ 
+}

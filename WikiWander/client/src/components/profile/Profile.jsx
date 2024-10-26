@@ -1,14 +1,15 @@
 import { Col, Container, Row } from "reactstrap"
 import { GamesList } from "./GamesList.jsx"
 import { UserDetails } from "./UserDetails.jsx"
+import "./Profile.css"
 
 export const Profile = ({ currentUser }) => {
 
     return(
         <>
             <Container>
-                <Row xs={2}>
-                    <Col>
+                <Row xs="2">
+                    <Col className="profile_details">
                         <h3>
                             Profile Details
                         </h3>
@@ -16,7 +17,7 @@ export const Profile = ({ currentUser }) => {
                             <UserDetails currentUser={currentUser} />
                         </div>
                     </Col>
-                    <Col>
+                    <Col className="profile_gamesList">
                         <h3>
                             Game History
                         </h3>
