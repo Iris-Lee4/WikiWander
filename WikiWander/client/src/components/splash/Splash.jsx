@@ -32,6 +32,7 @@ export const Splash = ( { currentUser }) => {
             </div>
             <div className="splash-section">
                 <Button
+                color="success"
                 onClick={() => {navigate('/game')}}
                 >
                     New Game

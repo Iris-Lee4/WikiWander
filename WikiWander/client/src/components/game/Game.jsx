@@ -176,6 +176,7 @@ const setArticlesForGame = () => {
 
                 <Button
                 className="button"
+                color="success"
               onClick={() => {
                 newGame()
                 setGameActivated(true);
