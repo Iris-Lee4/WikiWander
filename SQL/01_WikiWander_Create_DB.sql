@@ -36,7 +36,9 @@ CREATE TABLE Game (
     StartArticleId INT FOREIGN KEY REFERENCES Article(Id),
     EndArticleId INT FOREIGN KEY REFERENCES Article(Id),
     StepCount INT,
-    Duration INT
+    Duration INT, 
+    TimeStamp DateTime, 
+    Completed BIT
 );
 
 -- Creating the Message table

@@ -171,11 +171,11 @@ SET IDENTITY_INSERT Article OFF;
 -- Insert data into the Game table
 SET IDENTITY_INSERT Game ON;
 
-INSERT INTO Game (Id, UserProfileId, StartArticleId, EndArticleId, StepCount, Duration)
+INSERT INTO Game (Id, UserProfileId, StartArticleId, EndArticleId, StepCount, Duration, TimeStamp, Completed)
 VALUES
-(1, 1, 1, 2, 5, 15),
-(2, 2, 3, 4, 7, 20),
-(3, 3, 5, 1, 10, 30);
+(1, 1, 1, 2, 5, 15, '2024-10-08 10:00:00', 0),
+(2, 2, 3, 4, 7, 20, '2024-10-08 10:05:00', 1),
+(3, 3, 5, 1, 10, 30, '2024-10-08 10:10:00', 1);
 
 SET IDENTITY_INSERT Game OFF;
 
@@ -189,3 +189,5 @@ VALUES
 (3, 3, 'Yet another message for testing.', '2024-10-08 10:10:00');
 
 SET IDENTITY_INSERT Message OFF;
+
+
