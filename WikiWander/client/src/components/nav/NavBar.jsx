@@ -12,12 +12,17 @@ import {
 import { logout } from "../../services/userProfileService.jsx";
 
 export const NavBar = ({ isLoggedIn, setIsLoggedIn, currentUser }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar 
+        color="dark" 
+        dark
+        expand={true}
+        container='fluid'  
+      >
         <NavbarBrand tag={RRNavLink} to="/">
           Wiki Wander
         </NavbarBrand>

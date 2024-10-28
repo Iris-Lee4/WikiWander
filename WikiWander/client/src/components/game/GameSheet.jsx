@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import "./GameSheet.css"
+import "./Game.css"
 
 export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
   const myRef = useRef(null);
@@ -9,7 +9,7 @@ export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
     let newBoard = board
     //  newBoard = newBoard.replace(/href/g, "name");
     // newBoard = newBoard.replace(/title/g, "name");
-    newBoard = newBoard.replace(/href="\/wiki\//g, 'class="clickable" name="');
+    newBoard = newBoard.replace(/href="\/wiki\//g, 'class="gamesheet-clickable" name="');
 
     myRef.current.innerHTML = newBoard;
     // console.log(newBoard);
@@ -17,7 +17,9 @@ export const GameSheet = ({ board, fetchPage, handleGameChange }) => {
   }, [myRef, board]);
 
   return (
-    <div onClick={(e) => 
+    <div 
+    className="game_board--sheet"
+    onClick={(e) => 
         {
             // e.preventDefault();
             fetchPage(e.target.name);

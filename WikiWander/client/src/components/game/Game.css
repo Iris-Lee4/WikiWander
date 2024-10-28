@@ -1,0 +1,33 @@
+.gamesheet-clickable {
+    color: blue;
+}
+
+.mw-redirect {
+    color: black;
+}
+
+.button {
+    /* align-items: center; */
+    margin: auto;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game_details {
+    border: 8px solid black;
+    padding: 1rem;
+    /* position: fixed; */
+
+}
+
+.game_board {
+    border: 8px solid black;
+    padding: 1rem;
+ 
+}
+
+/* .game_board--sheet {
+    overflow-y: scroll;
+} */
