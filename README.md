@@ -2,11 +2,13 @@
 
 ## Walkthrough
 
-### Loginas a
+### Login
+![login](images/Login.png)
 
 ### Register
+![register](images/Register.png)
 
-### Splash Page
+### Home
 
 ### Gameplay - New Game
 
