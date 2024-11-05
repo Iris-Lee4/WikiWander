@@ -3,18 +3,22 @@
 ## Walkthrough
 
 ### Login
-![login](images/Login.png)
+![login](WikiWander/client/images/Login.png)
 
 ### Register
-![register](images/Register.png)
+![register](WikiWander/client/images/Register.png)
 
 ### Home
+![home](WikiWander/client/images/Home.png)
 
 ### Gameplay - New Game
+![newgame](WikiWander/client/images/NewGame.png)
 
 ### Gameplay - Game in Progress
+![gameplay](WikiWander/client/images/GamePlay.png)
 
 ### Profile 
+![profile](WikiWander/client/images/Profile.png)
 
 
 ## Install
